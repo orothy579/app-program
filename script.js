@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadingPercentage = document.getElementById('loading-percentage');
   const introSection = document.getElementById('intro-section');
   const loadingSection = document.querySelector('.loading-section');
-  const fadeElements = document.querySelectorAll('.fade-in');
+  const projectItems = document.querySelectorAll('.project-item');
 
   let percentage = 0;
   const loadingInterval = setInterval(() => {
@@ -11,18 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (percentage >= 100) {
           clearInterval(loadingInterval);
-          loadingSection.classList.add('hidden');
-          introSection.classList.add('visible');
+          setTimeout(() => {
+              loadingSection.classList.add('hidden');
+              introSection.classList.add('visible');
+          }, 500); // Delay to allow the last frame of the animation
       }
-  }, 50);
+  }, 30); // Faster increment for smoother animation
 
   window.addEventListener('scroll', () => {
-      fadeElements.forEach(element => {
-          const rect = element.getBoundingClientRect();
+      projectItems.forEach((item, index) => {
+          const rect = item.getBoundingClientRect();
           if (rect.top < window.innerHeight && rect.bottom > 0) {
-              element.classList.add('visible');
-          } else {
-              element.classList.remove('visible');
+              setTimeout(() => {
+                  item.classList.add('visible');
+              }, index * 150); // Stagger the animation
           }
       });
   });

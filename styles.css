@@ -36,9 +36,10 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 20px 50px;
   background-color: #fff;
   z-index: 10;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -64,7 +65,8 @@ body, html {
   color: #000;
   font-size: 2.5em;
   text-align: left;
-  padding-left: 20px;
+  padding-left: 50px;
+  box-sizing: border-box;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
@@ -144,10 +146,60 @@ body, html {
   opacity: 1;
 }
 
-.contact-section {
-  padding: 20px;
-  background-color: #d0d0d0;
+.contact-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  color: #fff;
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: 50px;
+  box-sizing: border-box;
+  z-index: 20;
+}
+
+.contact-overlay.visible {
+  display: flex;
+}
+
+.contact-content {
+  width: 100%;
+}
+
+.contact-item {
+  font-size: 1.5em;
+  margin: 10px 0;
+  transition: opacity 0.3s ease;
+}
+
+.contact-item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+.contact-item:hover ~ .contact-item,
+.contact-item:hover ~ .contact-item ~ .contact-item {
+  opacity: 0;
+}
+
+.contact-item:hover,
+.contact-item:hover ~ .contact-item {
+  opacity: 1;
+}
+
+.nav a#contact-button {
   color: #000;
-  font-size: 2em;
-  text-align: center;
+}
+
+.contact-overlay .header .nav a#contact-button {
+  color: #fff !important;
 }

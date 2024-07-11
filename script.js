@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const introSection = document.getElementById('intro-section');
   const loadingSection = document.querySelector('.loading-section');
   const projectItems = document.querySelectorAll('.project-item');
+  const contactButton = document.getElementById('contact-button');
+  const contactOverlay = document.getElementById('contact-overlay');
+  const contactItems = document.querySelectorAll('.contact-item');
 
   let percentage = 0;
   const loadingInterval = setInterval(() => {
@@ -27,5 +30,33 @@ document.addEventListener('DOMContentLoaded', () => {
               }, index * 150); // Stagger the animation
           }
       });
+  });
+
+  contactButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      contactOverlay.classList.add('visible');
+  });
+
+  contactItems.forEach(item => {
+      item.addEventListener('mouseover', () => {
+          contactItems.forEach(otherItem => {
+              if (otherItem !== item) {
+                  otherItem.style.opacity = '0';
+              }
+          });
+      });
+
+      item.addEventListener('mouseout', () => {
+          contactItems.forEach(otherItem => {
+              otherItem.style.opacity = '1';
+          });
+      });
+  });
+
+  // Optional: Close overlay when clicking outside of the contact content
+  contactOverlay.addEventListener('click', (event) => {
+      if (event.target === contactOverlay) {
+          contactOverlay.classList.remove('visible');
+      }
   });
 });
